@@ -12,10 +12,26 @@
       <form>
         <select autofocus onchange="handleSelect(event)">
           <option disabled selected>Choose bookmarklet</option>
+          <option value="mailto:?subject={{title}}&body={{url}}">Email</option>
+          <option value="mailto:{{selfEmail}}?subject={{title}}&body={{url}}">Email Self</option>
+          <option value="mailto:{{spouseEmail}}?subject={{title}}&body={{url}}">Email Spouse</option>
           <option value="https://www.instapaper.com/hello2?u={{url}}&t={{title}}">Instapaper</option>
           <option value="https://www.instapaper.com/text?u={{url}}">Instapaper Text</option>
+          <option value="https://smmry.com/{{rawUrl}}">SMMRY</option>
+          <option value="http://web.archive.org/web/*/{{rawUrl}}">Wayback Machine</option>
         </select>
       </form>
+
+      <details>
+        <summary style="cursor:pointer">Configuration</summary>
+        <form onsubmit="saveToLocalStorage(event)">
+          <label for="selfEmail">Self Email</label><br>
+          <input type="text" name="selfEmail"><br>
+          <label for="spouseEmail">Spouse Email</label><br>
+          <input type="text" name="spouseEmail"><br>
+          <input type="submit" value="Save">
+        </form>
+      </setails>
     </main>
   </body>
   <script>
@@ -28,10 +44,23 @@ function handleSelect (event) {
   const redirectUrl = event.target.value
 
   const rewrittenUrl = redirectUrl.
+    replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
+    replace("{{spouseEmail}}", encodeURIComponent(localStorage.spouseEmail)).
     replace("{{url}}", encodeURIComponent(url)).
+    replace("{{rawUrl}}", url).
     replace("{{title}}", encodeURIComponent(title))
 
   document.location = rewrittenUrl
+}
+
+function saveToLocalStorage(event) {
+  event.preventDefault()
+
+  Array.from(event.target).forEach(function (input) {
+    localStorage[input.name] = input.value
+  })
+
+  alert("Saved!")
 }
   </script>
 </html>
