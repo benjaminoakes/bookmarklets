@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmarklets</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+  </head>
+  <body>
+    <main>
+      <form>
+        <select autofocus onchange="handleSelect(event)">
+          <option disabled selected>Choose bookmarklet</option>
+          <option value="https://www.instapaper.com/hello2?u={{url}}&t={{title}}">Instapaper</option>
+          <option value="https://www.instapaper.com/text?u={{url}}">Instapaper Text</option>
+        </select>
+      </form>
+    </main>
+  </body>
+  <script>
+function handleSelect (event) {
+  const searchParams = (new URL(document.location)).searchParams
+
+  const url = searchParams.get("url")
+  const title = searchParams.get("title")
+
+  const redirectUrl = event.target.value
+
+  const rewrittenUrl = redirectUrl.
+    replace("{{url}}", encodeURIComponent(url)).
+    replace("{{title}}", encodeURIComponent(title))
+
+  document.location = rewrittenUrl
+}
+  </script>
+</html>
