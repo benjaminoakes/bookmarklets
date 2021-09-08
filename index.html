@@ -17,6 +17,7 @@
           <option value="mailto:?subject={{title}}&body={{url}}">Email 📫</option>
           <option value="mailto:{{selfEmail}}?subject={{title}}&body={{url}}">Email Self 🤳</option>
           <option value="mailto:{{spouseEmail}}?subject={{title}}&body={{url}}">Email Spouse ❤️</option>
+          <option value="sms:{{spousePhone}}?body={{title}}%20{{url}}">SMS Spouse ❤️</option>
           <option value="mailto:{{workEmail}}?subject={{title}}&body={{url}}">Email Self at Work 🏢</option>
           <option value="https://www.instapaper.com/hello2?u={{url}}&t={{title}}">Instapaper 📰</option>
           <option value="https://www.instapaper.com/text?u={{url}}">Instapaper Text 📖</option>
@@ -35,6 +36,8 @@
           <input type="text" name="selfEmail"><br>
           <label for="spouseEmail">Spouse Email</label><br>
           <input type="text" name="spouseEmail"><br>
+          <label for="spousePhone">Spouse Phone</label><br>
+          <input type="text" name="spousePhone"><br>
           <label for="workEmail">Work Email</label><br>
           <input type="text" name="workEmail"><br>
           <input type="submit" value="Save">
