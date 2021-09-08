@@ -58,6 +58,7 @@ function handleSelect (event) {
   const rewrittenUrl = redirectUrl.
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
     replace("{{spouseEmail}}", encodeURIComponent(localStorage.spouseEmail)).
+    replace("{{spousePhone}}", encodeURIComponent(localStorage.spousePhone)).
     replace("{{workEmail}}", encodeURIComponent(localStorage.workEmail)).
     replace("{{hostname}}", encodeURIComponent(parsedUrl.hostname)).
     replace("{{url}}", encodeURIComponent(url)).
