@@ -55,7 +55,7 @@ function handleSelect(event) {
   const url = searchParams.get("url")
   const parsedUrl = new URL(url)
   const title = searchParams.get("title")
-  const simpleTitle = title.split(/ [-|·] /)[0].trim()
+  const simpleTitle = title.split(/ [-|·] /)[0].replace(/\[[^\]]+\]/, '').trim()
 
   const redirectUrl = event.target.value
 
