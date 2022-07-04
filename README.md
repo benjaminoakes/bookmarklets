@@ -1,5 +1,5 @@
 # bookmarklets
-Bookmarklets for use on mobile Chrome
+Bookmarklets for use on desktop **and mobile**
 
 ## Usage
 
