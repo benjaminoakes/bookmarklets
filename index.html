@@ -46,6 +46,8 @@
           <input type="text" name="spousePhone"><br>
           <label for="workEmail">Work Email</label><br>
           <input type="text" name="workEmail"><br>
+          <label for="homepage">Homepage</label><br>
+          <input type="text" name="homepage"><br>
           <input type="submit" value="Save">
         </form>
       </details>
@@ -57,7 +59,7 @@ function handleLoad() {
   const url = searchParams.get("url")
   
   if (url == "about:blank") {
-    document.location = "https://www.benjaminoakes.com/prevent_close/"
+    document.location = localStorage.homepage || "https://www.benjaminoakes.com/prevent_close/"
   }
 }
 
