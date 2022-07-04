@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000000">
   </head>
-  <body>
+  <body onload="handleLoad()">
     <main>
       <form>
         <select autofocus onchange="handleSelect(event)">
@@ -52,6 +52,15 @@
     </main>
   </body>
   <script>
+function handleLoad() {
+  const searchParams = (new URL(document.location)).searchParams
+  const url = searchParams.get("url")
+  
+  if (url == "about:blank") {
+    document.location = "https://www.benjaminoakes.com/prevent_close/"
+  }
+}
+
 function handleSelect(event) {
   const searchParams = (new URL(document.location)).searchParams
 
