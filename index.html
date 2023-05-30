@@ -89,9 +89,9 @@ function handleSelect(event) {
     replace("{{workEmail}}", encodeURIComponent(localStorage.workEmail)).
     replace("{{invidiousHost}}", encodeURIComponent(localStorage.invidiousHost)).
     replace("{{libredditHost}}", encodeURIComponent(localStorage.libredditHost)).
-    replace("{{hostname}}", encodeURIComponent(parsedUrl.hostname)).
-    replace("{{pathname}}", encodeURIComponent(parsedUrl.pathname)).
-    replace("{{search}}", encodeURIComponent(parsedUrl.search)).
+    replace("{{hostname}}", parsedUrl.hostname).
+    replace("{{pathname}}", parsedUrl.pathname).
+    replace("{{search}}", parsedUrl.search).
     replace("{{url}}", encodeURIComponent(url)).
     replace("{{rawUrl}}", url).
     replace("{{simpleTitle}}", encodeURIComponent(simpleTitle)).
