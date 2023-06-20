@@ -23,10 +23,10 @@
           <option value="https://jekyll.benjaminoakes.com/?title={{simpleTitle}}&text={{url}}">Jekyll 🧪</option>
           <option value="https://jekyll.benjaminoakes.com/?title={{title}}&text={{url}}">Jekyll (full title) 🧪</option>
           <option value="https://{{libredditHost}}{{pathname}}{{search}}">Libreddit 👽</option>
-          <option value="https://m.rememberthemilk.com/add?priority=1&name={{simpleTitle}}&url={{url}}">Milk, Remember the (priority 1) 🐮</option>
-          <option value="https://m.rememberthemilk.com/add?name={{simpleTitle}}&url={{url}}">Milk, Remember the 🐮</option>
-          <option value="https://m.rememberthemilk.com/add?priority=1&name={{title}}&url={{url}}">Milk, Remember the (full title, priority 1) 🐮</option>
-          <option value="https://m.rememberthemilk.com/add?name={{title}}&url={{url}}">Milk, Remember the (full title) 🐮</option>
+          <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{simpleTitle}}%20{{url}}%20!1">Milk, Remember the (priority 1) 🐮</option>
+          <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{simpleTitle}}%20{{url}}%20">Milk, Remember the 🐮</option>
+          <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{title}}%20{{url}}%20!1">Milk, Remember the (full title, priority 1) 🐮</option>
+          <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{title}}%20{{url}}%20">Milk, Remember the (full title) 🐮</option>
           <option value="sms:{{spousePhone}}?body={{title}}%20{{url}}">SMS Spouse ❤️</option>
           <option value="https://www.instapaper.com/hello2?u={{url}}&t={{title}}">Instapaper 📰</option>
           <option value="https://www.instapaper.com/text?u={{url}}">Instapaper Text 📖</option>
@@ -43,6 +43,9 @@
       <details>
         <summary style="cursor:pointer">Configuration</summary>
         <form onsubmit="saveToLocalStorage(event)">
+          <p><a href="https://www.rememberthemilk.com/services/email/">Remember the Milk: How to add a task via email</a></p>
+          <label for="rememberTheMilkInboxEmail">Remember the Milk Inbox email</label><br>
+          <input type="text" name="rememberTheMilkInboxEmail"><br>
           <label for="selfEmail">Self Email</label><br>
           <input type="text" name="selfEmail"><br>
           <label for="spouseEmail">Spouse Email</label><br>
@@ -66,7 +69,7 @@
 function handleLoad() {
   const searchParams = (new URL(document.location)).searchParams
   const url = searchParams.get("url")
-  
+
   if (url === "about:blank") {
     document.location = localStorage.homepage || "https://www.benjaminoakes.com/prevent_close/"
   }
@@ -83,6 +86,7 @@ function handleSelect(event) {
   const redirectUrl = event.target.value
 
   const rewrittenUrl = redirectUrl.
+    replace("{{rememberTheMilkInboxEmail}}", encodeURIComponent(localStorage.rememberTheMilkInboxEmail)).
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
     replace("{{spouseEmail}}", encodeURIComponent(localStorage.spouseEmail)).
     replace("{{spousePhone}}", encodeURIComponent(localStorage.spousePhone)).
@@ -96,6 +100,8 @@ function handleSelect(event) {
     replace("{{rawUrl}}", url).
     replace("{{simpleTitle}}", encodeURIComponent(simpleTitle)).
     replace("{{title}}", encodeURIComponent(title))
+
+  console.log(rewrittenUrl)
 
   document.location = rewrittenUrl
 }
