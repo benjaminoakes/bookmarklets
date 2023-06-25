@@ -11,6 +11,7 @@
       <form>
         <select autofocus onchange="handleSelect(event)">
           <option disabled selected>Choose bookmarklet</option>
+          <option value="mailto:{{assistantEmail}}?subject=Please%20Read%20:%20{{simpleTitle}}&body={{url}}">Assistant 🧑‍💼</option>
           <option value="https://www.amputatorbot.com/?generate-comment=false&guess-and-check=true&max-depth=3&redirect=true&q={{url}}">AmputatorBot 🤖</option>
           <option value="http://www.bugmenot.com/view/{{hostname}}">BugMeNot 🪲</option>
           <option value="https://www.camelcamelcamel.com/search?sq={{url}}">Camel Camel Camel 🐫</option>
@@ -43,6 +44,8 @@
       <details>
         <summary style="cursor:pointer">Configuration</summary>
         <form onsubmit="saveToLocalStorage(event)">
+          <label for="assistantEmail">Assistant email</label><br>
+          <input type="text" name="assistantEmail"><br>
           <p><a href="https://www.rememberthemilk.com/services/email/">Remember the Milk: How to add a task via email</a></p>
           <label for="rememberTheMilkInboxEmail">Remember the Milk Inbox email</label><br>
           <input type="text" name="rememberTheMilkInboxEmail"><br>
@@ -86,6 +89,7 @@ function handleSelect(event) {
   const redirectUrl = event.target.value
 
   const rewrittenUrl = redirectUrl.
+    replace("{{assistantEmail}}", encodeURIComponent(localStorage.assistantEmail)).
     replace("{{rememberTheMilkInboxEmail}}", encodeURIComponent(localStorage.rememberTheMilkInboxEmail)).
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
     replace("{{spouseEmail}}", encodeURIComponent(localStorage.spouseEmail)).
