@@ -23,6 +23,7 @@
           <option value="https://{{invidiousHost}}{{pathname}}{{search}}">Inviduious ▶️</option>
           <option value="https://jekyll.benjaminoakes.com/?title={{simpleTitle}}&text={{url}}">Jekyll 🧪</option>
           <option value="https://jekyll.benjaminoakes.com/?title={{title}}&text={{url}}">Jekyll (full title) 🧪</option>
+          <option value="mailto:{{kindleEmail}}?subject={{title}}&body={{url}}">Kindle 📚</option>
           <option value="https://{{libredditHost}}{{pathname}}{{search}}">Libreddit 👽</option>
           <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{simpleTitle}}%20{{url}}%20!1">Milk, Remember the (priority 1) 🐮</option>
           <option value="mailto:{{rememberTheMilkInboxEmail}}?subject={{simpleTitle}}%20{{url}}%20">Milk, Remember the 🐮</option>
@@ -45,6 +46,8 @@
         <form onsubmit="saveToLocalStorage(event)">
           <label for="assistantEmail">Assistant email</label><br>
           <input type="text" name="assistantEmail"><br>
+          <label for="kindleEmail">Kindle email</label><br>
+          <input type="text" name="kindleEmail"><br>
           <p><a href="https://www.rememberthemilk.com/services/email/">Remember the Milk: How to add a task via email</a></p>
           <label for="rememberTheMilkInboxEmail">Remember the Milk Inbox email</label><br>
           <input type="text" name="rememberTheMilkInboxEmail"><br>
@@ -89,6 +92,7 @@ function handleSelect(event) {
 
   const rewrittenUrl = redirectUrl.
     replace("{{assistantEmail}}", encodeURIComponent(localStorage.assistantEmail)).
+    replace("{{kindleEmail}}", encodeURIComponent(localStorage.kindleEmail)).
     replace("{{rememberTheMilkInboxEmail}}", encodeURIComponent(localStorage.rememberTheMilkInboxEmail)).
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
     replace("{{spouseEmail}}", encodeURIComponent(localStorage.spouseEmail)).
