@@ -98,7 +98,7 @@ function handleSelect(event) {
 
   const rewrittenUrl = redirectUrl.
     replace("{{assistantEmail}}", encodeURIComponent(localStorage.assistantEmail)).
-    replace("{{githubPath}}", encodeURIComponent(localStorage.githubPath)).
+    replace("{{githubPath}}", localStorage.githubPath).
     replace("{{kindleEmail}}", encodeURIComponent(localStorage.kindleEmail)).
     replace("{{rememberTheMilkInboxEmail}}", encodeURIComponent(localStorage.rememberTheMilkInboxEmail)).
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
