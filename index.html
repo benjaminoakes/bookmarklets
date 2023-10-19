@@ -20,6 +20,7 @@
           <option value="mailto:{{selfEmail}}?subject={{title}}&body={{url}}">Email Self 🤳</option>
           <option value="mailto:{{workEmail}}?subject={{title}}&body={{url}}">Email Self at Work 🏢</option>
           <option value="mailto:{{spouseEmail}}?subject={{title}}&body={{url}}">Email Spouse ❤️</option>
+          <option value="https://github.com/{{githubPath}}?filename={{uuid}}.txt&value={{url}}">GitHub 🐙</option>
           <option value="https://www.instapaper.com/hello2?u={{url}}&t={{title}}">Instapaper 📰</option>
           <option value="https://www.instapaper.com/text?u={{url}}">Instapaper Text 📖</option>
           <option value="https://{{invidiousHost}}{{pathname}}{{search}}">Inviduious ▶️</option>
@@ -46,6 +47,8 @@
         <form onsubmit="saveToLocalStorage(event)">
           <label for="assistantEmail">Assistant email</label><br>
           <input type="text" name="assistantEmail"><br>
+          <label for="githubPath">GitHub Path</label><br>
+          <input type="text" name="githubPath" placeholder="benjaminoakes/bookmarklets/new/main"><br>
           <label for="kindleEmail">Kindle email</label><br>
           <input type="text" name="kindleEmail"><br>
           <p><a href="https://www.rememberthemilk.com/services/email/">Remember the Milk: How to add a task via email</a></p>
@@ -88,10 +91,14 @@ function handleSelect(event) {
   const title = searchParams.get("title")
   const simpleTitle = title.split(/ [-|·] /)[0].replace(/\[[^\]]+\]/, '').trim()
 
+  let uuid
+  if ('crypto' in self) { uuid = crypto.randomUUID() }
+
   const redirectUrl = event.target.value
 
   const rewrittenUrl = redirectUrl.
     replace("{{assistantEmail}}", encodeURIComponent(localStorage.assistantEmail)).
+    replace("{{githubPath}}", encodeURIComponent(localStorage.githubPath)).
     replace("{{kindleEmail}}", encodeURIComponent(localStorage.kindleEmail)).
     replace("{{rememberTheMilkInboxEmail}}", encodeURIComponent(localStorage.rememberTheMilkInboxEmail)).
     replace("{{selfEmail}}", encodeURIComponent(localStorage.selfEmail)).
@@ -104,6 +111,7 @@ function handleSelect(event) {
     replace("{{pathname}}", parsedUrl.pathname).
     replace("{{search}}", parsedUrl.search).
     replace("{{url}}", encodeURIComponent(url)).
+    replace("{{uuid}}", uuid).
     replace("{{rawUrl}}", url).
     replace("{{simpleTitle}}", encodeURIComponent(simpleTitle)).
     replace("{{title}}", encodeURIComponent(title))
